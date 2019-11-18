@@ -1,0 +1,8 @@
+{
+  "name": "server-bug-tracker",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/whiskeyraven/server-bug-tracker.git",
+  "author": "freefaller69 <freefaller@gmail.com>",
+  "license": "MIT"
+}
