@@ -6,21 +6,21 @@ const bugRoutes = require('./routes/bugs');
 // const userRoutes = require('./routes/user');
 // const fileRoutes = require('./routes/upload');
 
-// const db = require('./config/db');
+const db = require('./config/db');
 
 const app = express();
 
 mongoose.set('useCreateIndex', true);
-// mongoose.connect(db.mLAB_DB, { useNewUrlParser: true })
-//   .then(() => {
-//     console.log('Connected to database!');
-//   })
-//   .catch(() => {
-//     console.log('Connection failed!');
-//   });
+mongoose.connect(db.mLAB_DB, { useNewUrlParser: true })
+  .then(() => {
+    console.log('Connected to database!');
+  })
+  .catch(() => {
+    console.log('Connection failed!');
+  });
 
 app.use(express.json());
-// app.use(express.urlencoded());
+app.use(express.urlencoded());
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
