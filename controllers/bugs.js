@@ -20,7 +20,7 @@ exports.getAllBugs = (req, res, next) => {
         title: document.title,
         severity: document.severity,
         priority: document.priority,
-        status: document.title,
+        status: document.status,
         type: document.type,
         description: document.description,
         owner: document.owner,
@@ -47,19 +47,19 @@ exports.getBugById = (req, res, next) => {
   Bug.findById({
     _id: req.params.id
   })
-    .then(bug => {
-      if (bug) {
-        res.status(200).json({
-          message: 'Bug retrieved successfully',
-          bug: bug
-        });
-      }
-    })
-    .catch(err => {
-      const error = new Error(err);
-      error.httpStatusCode = 500;
-      return next(error);
-    });
+  .then(bug => {
+    if (bug) {
+      res.status(200).json({
+        message: 'Bug retrieved successfully',
+        bug: bug
+      });
+    }
+  })
+  .catch(err => {
+    const error = new Error(err);
+    error.httpStatusCode = 500;
+    return next(error);
+  });
 }
 
 exports.createBug = (req, res, next) => {
