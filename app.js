@@ -31,6 +31,10 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use((error, req, res, next) => {
+  return error;
+});
+
 app.use("/api/bugs", bugRoutes);
 // app.use("/api/user", userRoutes);
 // app.use("/api/upload", fileRoutes);

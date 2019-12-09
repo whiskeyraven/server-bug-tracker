@@ -35,7 +35,31 @@ exports.getAllBugs = (req, res, next) => {
       message: 'Bugs retrieved successfully',
       bugs: fetchedBugs
     });
+  })
+  .catch(err => {
+    const error = new Error(err);
+    error.httpStatusCode = 500;
+    return next(error);
   });
+}
+
+exports.getBugById = (req, res, next) => {
+  Bug.findById({
+    _id: req.params.id
+  })
+    .then(bug => {
+      if (bug) {
+        res.status(200).json({
+          message: 'Bug retrieved successfully',
+          bug: bug
+        });
+      }
+    })
+    .catch(err => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
 }
 
 exports.createBug = (req, res, next) => {
@@ -60,7 +84,31 @@ exports.createBug = (req, res, next) => {
       });
     })
     .catch(err => {
-      console.log(err);
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
+}
+
+exports.updateBug = (req, res, next) => {
+  const id = req.params.id;
+  const updatedBug = { ...req.body };
+  const options = { new: true }; 
+  Bug.findByIdAndUpdate(id, updatedBug, options)
+    .then(bug => {
+      console.log('then bug', bug);
+      if (!bug) {
+        return 'Bug not found'
+      };
+      res.status(200).json({
+        message: 'Bug updated successfully',
+        updatedBug: bug
+      });
+    })
+    .catch(err => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
     });
 }
 
@@ -79,5 +127,10 @@ exports.deleteBug = (req, res, next) => {
           message: 'Delete not authorized'
         });
       }
+    })
+    .catch(err => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
     });
 }
