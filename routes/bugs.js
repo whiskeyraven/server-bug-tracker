@@ -10,9 +10,16 @@ const BugController = require('../controllers/bugs');
 router.get('', BugController.getAllBugs);
 // router.get('', checkAuth, BugController.getAllBugs);
 
+// Get bug by ID
+router.get('/:id', BugController.getBugById);
+// router.get('', checkAuth, BugController.getBugById);
+
 // Create a new bug
 router.post('', BugController.createBug);
 // router.bug('', checkAuth, BugController.createBug);
+
+// Update an existing bug
+router.patch('/:id', BugController.updateBug);
 
 // Delete bug
 router.delete('/:id', BugController.deleteBug);
