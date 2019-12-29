@@ -1,4 +1,4 @@
-const Bug = require('../models/bug')
+const Bug = require('../models/bug');
 
 exports.getAllBugs = (req, res, next) => {
   let fetchedBugs;
@@ -96,7 +96,6 @@ exports.updateBug = (req, res, next) => {
   const options = { new: true }; 
   Bug.findByIdAndUpdate(id, updatedBug, options)
     .then(bug => {
-      console.log('then bug', bug);
       if (!bug) {
         return 'Bug not found'
       };
