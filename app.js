@@ -3,7 +3,7 @@ const express = require("express");
 const mongoose = require('mongoose');
 
 const bugRoutes = require('./routes/bugs');
-// const userRoutes = require('./routes/user');
+const authRoutes = require('./routes/auth');
 // const fileRoutes = require('./routes/upload');
 
 const db = require('./config/db');
@@ -32,11 +32,14 @@ app.use((req, res, next) => {
 });
 
 app.use((error, req, res, next) => {
-  return error;
+  const status = error.statusCode || 500;
+  const message = error.message;
+  const data = error.data;
+  res.status(status).json({ message: message, data: data });
 });
 
 app.use("/api/bugs", bugRoutes);
-// app.use("/api/user", userRoutes);
+app.use("/api/auth", authRoutes);
 // app.use("/api/upload", fileRoutes);
 
 module.exports = app;
