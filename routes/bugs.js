@@ -1,28 +1,35 @@
 const express = require('express');
+
 const router = express.Router();
 
-const BugController = require('../controllers/bugs');
+const Bug = require('../models/bug');
+const BugsController = require('../controllers/bugsController');
+// const commentRouter = require('./comments');
 
-// const Bug = require('../models/bug');
-// const checkAuth = require('../middleware/check-auth');
+const routeProtect = require('../middleware/route-protect');
+const setCreator = require('../middleware/set-creator');
+const { setDocument } = require('../middleware/set-document');
+const checkAuth = require('../middleware/check-auth');
 
-// Get all bugs
-router.get('', BugController.getAllBugs);
-// router.get('', checkAuth, BugController.getAllBugs);
+// router.use('/:id/comments', commentRouter);
 
-// Get bug by ID
-router.get('/:id', BugController.getBugById);
-// router.get('', checkAuth, BugController.getBugById);
+// TODO integrate and uncomment
+// router.use(routeProtect);
 
-// Create a new bug
-router.post('', BugController.createBug);
-// router.bug('', checkAuth, BugController.createBug);
+router
+  .route('')
+  .get(routeProtect, BugsController.getAllBugs)
+  .post(routeProtect, setCreator, BugsController.createBug);
 
-// Update an existing bug
-router.patch('/:id', BugController.updateBug);
-
-// Delete bug
-router.delete('/:id', BugController.deleteBug);
-// router.delete('/:id', checkAuth, BugController.deleteBug);
+router
+  .route('/:id')
+  .get(routeProtect, BugsController.getBug)
+  .patch(routeProtect, setDocument(Bug), checkAuth, BugsController.updateBug)
+  .delete(
+    routeProtect,
+    setDocument(Bug),
+    checkAuth,
+    BugsController.deleteBug
+  );
 
 module.exports = router;
