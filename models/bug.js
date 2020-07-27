@@ -28,7 +28,7 @@ const bugSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    owner: {
+    creator: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
       required: true,

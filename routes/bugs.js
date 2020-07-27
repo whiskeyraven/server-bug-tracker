@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 const Bug = require('../models/bug');
-const BugController = require('../controllers/bugsController');
+const BugsController = require('../controllers/bugsController');
 // const commentRouter = require('./comments');
 
 const routeProtect = require('../middleware/route-protect');
@@ -18,18 +18,18 @@ const checkAuth = require('../middleware/check-auth');
 
 router
   .route('')
-  .get(routeProtect, BugController.getAllBugs)
-  .post(routeProtect, setCreator, BugController.createBug);
+  .get(routeProtect, BugsController.getAllBugs)
+  .post(routeProtect, setCreator, BugsController.createBug);
 
 router
   .route('/:id')
-  .get(BugController.getBug)
-  .patch(routeProtect, setDocument(Bug), checkAuth, BugController.updateBug)
+  .get(routeProtect, BugsController.getBug)
+  .patch(routeProtect, setDocument(Bug), checkAuth, BugsController.updateBug)
   .delete(
     routeProtect,
     setDocument(Bug),
     checkAuth,
-    BugController.deleteBug
+    BugsController.deleteBug
   );
 
 module.exports = router;
