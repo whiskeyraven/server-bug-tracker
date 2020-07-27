@@ -43,7 +43,6 @@ const bugSchema = mongoose.Schema(
 
 bugSchema.pre(/^find/, function (next) {
   this.populate('creator', 'username');
-  this.populate('comments');
   this.select('-__v');
   next();
 });

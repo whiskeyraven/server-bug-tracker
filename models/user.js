@@ -2,8 +2,6 @@ const crypto = require('crypto');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const uniqueValidator = require('mongoose-unique-validator');
-const Comment = require('./comment');
-const Post = require('./post');
 
 const userSchema = mongoose.Schema(
   {
@@ -51,16 +49,6 @@ userSchema.pre('save', async function (next) {
 
   this.password = await bcrypt.hash(this.password, 12);
   this.passwordDateSet = Date.now();
-  next();
-});
-
-userSchema.pre('deleteOne', { document: true, query: false }, async function (
-  next
-) {
-  const userId = this._id;
-  await Comment.deleteMany({ creator: userId });
-  await Comment.deleteMany({ postCreator: userId });
-  await Post.deleteMany({ creator: userId });
   next();
 });
 
