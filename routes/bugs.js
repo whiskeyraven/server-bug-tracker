@@ -25,11 +25,6 @@ router
   .route('/:id')
   .get(routeProtect, BugsController.getBug)
   .patch(routeProtect, setDocument(Bug), checkAuth, BugsController.updateBug)
-  .delete(
-    routeProtect,
-    setDocument(Bug),
-    checkAuth,
-    BugsController.deleteBug
-  );
+  .delete(routeProtect, setDocument(Bug), checkAuth, BugsController.deleteBug);
 
 module.exports = router;
