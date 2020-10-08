@@ -34,9 +34,11 @@ const handleValidationError = (err) => {
   return new AppError(message, 400);
 };
 
-const handleJWTerror = () => new AppError('Invalid token.  Please log in again.', 401);
+const handleJWTerror = () =>
+  new AppError('Invalid token.  Please log in again.', 401);
 
-const handleJWTexpiredError = () => new AppError('Token has expired.  Please log in again.', 401);
+const handleJWTexpiredError = () =>
+  new AppError('Token has expired.  Please log in again.', 401);
 
 module.exports = (err, req, res, next) => {
   const currentEnv = process.env.NODE_ENV.trim();
