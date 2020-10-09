@@ -3,7 +3,10 @@ const factory = require('./handlerFactory');
 
 exports.getAllBugs = factory.getAll(Bug);
 
-exports.getBug = factory.getOne(Bug, { path: 'creator', select: 'username' });
+exports.getBug = factory.getOne(Bug, {
+  path: 'reportedBy',
+  select: 'username',
+});
 
 exports.createBug = factory.createOne(Bug);
 
