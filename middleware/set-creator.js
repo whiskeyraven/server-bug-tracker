@@ -1,6 +1,6 @@
 module.exports = (req, res, next) => {
-  if (!req.body.creator) {
-    req.body.creator = req.user.id;
+  if (!req.body.reportedBy) {
+    req.body.reportedBy = req.user.id;
   }
   next();
 };

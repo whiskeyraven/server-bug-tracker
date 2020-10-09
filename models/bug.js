@@ -2,18 +2,28 @@ const mongoose = require('mongoose');
 
 const bugSchema = mongoose.Schema(
   {
-    title: {
+    summary: {
       type: String,
       trim: true,
       required: [true, 'The title field cannot be empty'],
       minlength: [5, 'The bug title must have at least five characters.'],
     },
+    description: {
+      type: String,
+      required: true,
+    },
+    isReproducable: {
+      type: String,
+      enum: ['Always', 'Sometimes', 'Never'],
+    },
     severity: {
       type: String,
+      enum: ['Minor', 'Moderate', 'Major', 'Critical'],
       required: true,
     },
     priority: {
       type: String,
+      enum: ['Low', 'Medium', 'High', 'Critical'],
       required: true,
     },
     status: {
@@ -24,25 +34,27 @@ const bugSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    description: {
-      type: String,
-      required: true,
-    },
-    creator: {
+    reportedBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
       required: true,
     },
-    fixer: {
+    assignedTo: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
+    },
+    resolved: {
+      type: Boolean,
+      required: true,
+      default: false,
     },
   },
-  { timestamps: { createdAt: 'created_at' } }
+  { timestamps: true }
 );
 
 bugSchema.pre(/^find/, function (next) {
-  this.populate('creator', 'username');
+  this.populate('reportedBy', 'username');
+  this.populate('assignedTo', 'username');
   this.select('-__v');
   next();
 });
