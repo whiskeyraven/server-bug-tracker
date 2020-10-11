@@ -2,11 +2,16 @@ const mongoose = require('mongoose');
 
 const bugSchema = mongoose.Schema(
   {
+    project: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Project',
+      required: true,
+    },
     summary: {
       type: String,
       trim: true,
-      required: [true, 'The title field cannot be empty'],
-      minlength: [5, 'The bug title must have at least five characters.'],
+      required: [true, 'The summary field cannot be empty'],
+      minlength: [5, 'The bug summary must have at least five characters.'],
     },
     description: {
       type: String,
@@ -53,9 +58,10 @@ const bugSchema = mongoose.Schema(
 );
 
 bugSchema.pre(/^find/, function (next) {
+  this.populate('project', 'name');
   this.populate('reportedBy', 'username');
   this.populate('assignedTo', 'username');
-  this.select('-__v');
+  // this.select('-__v');
   next();
 });
 

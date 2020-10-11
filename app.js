@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const express = require('express');
 const mongoose = require('mongoose');
 const rateLimit = require('express-rate-limit');
@@ -7,10 +8,9 @@ const mongoSanitize = require('express-mongo-sanitize');
 const AppError = require('./util/appError');
 const globalErrorHandler = require('./controllers/errorController');
 
+const projectRoutes = require('./routes/project');
 const bugRoutes = require('./routes/bugs');
 const userRoutes = require('./routes/user');
-// const commentRoutes = require('./routes/comments');
-// const fileRoutes = require('./routes/upload');
 
 const app = express();
 
@@ -43,8 +43,6 @@ app.use(express.json({ limit: '10kb' }));
 app.use(mongoSanitize());
 app.use(express.urlencoded());
 
-// app.use("/images", express.static(path.join("images")));
-
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader(
@@ -58,10 +56,9 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use('/api/project', projectRoutes);
 app.use('/api/bugs', bugRoutes);
 app.use('/api/user', userRoutes);
-// app.use('/api/comments', commentRoutes);
-// app.use("/api/upload", fileRoutes);
 app.all('*', (req, res, next) => {
   next(new AppError(`Cannot find ${req.originalUrl} on this server.`, 404));
 });
