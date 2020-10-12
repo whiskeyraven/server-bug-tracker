@@ -8,6 +8,7 @@ const ProjectController = require('../controllers/projectController');
 const routeProtect = require('../middleware/route-protect');
 const { setDocument } = require('../middleware/set-document');
 const checkAuth = require('../middleware/check-auth');
+const isAdmin = require('../middleware/is-admin');
 
 router
   .route('')
@@ -27,6 +28,7 @@ router
     routeProtect,
     setDocument(Project),
     checkAuth,
+    isAdmin,
     ProjectController.deleteProject
   );
 

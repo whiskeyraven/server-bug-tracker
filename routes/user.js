@@ -3,11 +3,11 @@ const UserController = require('../controllers/userController');
 const AuthController = require('../controllers/authController');
 const routeProtect = require('../middleware/route-protect');
 const isAdmin = require('../middleware/is-admin');
-// const isUser = require('../middleware/is-user');
 
 const router = express.Router();
 
 router.get('/users', routeProtect, isAdmin, UserController.getAllUsers);
+router.get('/:id', routeProtect, UserController.getUser);
 
 // Create a new user
 router.post('/signup', AuthController.signup);
@@ -19,7 +19,7 @@ router.post('/login', AuthController.userLogin);
 router.patch('/updateProfile', routeProtect, UserController.updateProfile);
 
 // Delete user
-router.delete('/deleteUser/:id', routeProtect, UserController.deleteUser);
+router.delete('/:id', routeProtect, isAdmin, UserController.deleteUser);
 
 // Forgot password
 router.post('/forgotPassword', AuthController.forgotPassword);
