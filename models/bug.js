@@ -20,6 +20,7 @@ const bugSchema = mongoose.Schema(
     isReproducable: {
       type: String,
       enum: ['Always', 'Sometimes', 'Never'],
+      required: true,
     },
     severity: {
       type: String,
@@ -33,6 +34,7 @@ const bugSchema = mongoose.Schema(
     },
     status: {
       type: String,
+      enum: ['Pending', 'In Progress', 'Resolved'],
       required: true,
     },
     type: {
