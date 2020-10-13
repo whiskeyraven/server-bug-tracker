@@ -2,9 +2,14 @@ const AppError = require('../util/appError');
 
 module.exports = (req, res, next) => {
   const { user } = req;
-  const creator = req.doc.creator._id.toString();
+  let currentUser;
+  if (req.doc.owner) {
+    currentUser = req.doc.owner._id.toString();
+  } else if (req.doc.reportedBy) {
+    currentUser = req.doc.reportedBy._id.toString();
+  }
 
-  if (user.id !== creator && user.role !== 'admin') {
+  if (user.id !== currentUser && user.role !== 'admin') {
     return next(new AppError('Unauthorized action.', 403));
   }
 

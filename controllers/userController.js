@@ -15,6 +15,8 @@ const filteredObj = (obj) => {
   return newObj;
 };
 
+exports.getUser = factory.getOne(User);
+
 exports.updateProfile = catchAsync(async (req, res, next) => {
   if (req.body.password) {
     delete req.body.password;
