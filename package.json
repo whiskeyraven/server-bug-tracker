@@ -5,7 +5,8 @@
   "author": "freefaller69 <freefaller@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "export NODE_ENV=development && nodemon server.js",
+    "start": "node server.js",
+    "start:dev": "export NODE_ENV=development && nodemon server.js",
     "start:prod": "export NODE_ENV=production && nodemon server.js",
     "debug": "ndb server.js",
     "prettier": "prettier --config .prettierrc --write \"**/*.js\""
