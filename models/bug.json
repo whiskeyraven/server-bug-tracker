@@ -1,9 +1,0 @@
-{
-    "summary": "button doesn't work",
-    "description": "When the form submit button is clicked, there is no response",
-    "severity": "Critical",
-    "priority": "Critical",
-    "status": "Pending",
-    "type": "UI bug",
-    "reportedBy": "5f1f2d55a6c1704518011999"
-}
