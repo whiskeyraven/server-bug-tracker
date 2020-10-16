@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 const AppError = require('../util/appError');
 
 const sendErrorDev = (err, res) => {

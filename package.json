@@ -9,6 +9,7 @@
     "start:dev": "export NODE_ENV=development && nodemon server.js",
     "start:prod": "export NODE_ENV=production && nodemon server.js",
     "debug": "ndb server.js",
+    "pretest": "eslint --ignore-path .gitignore .",
     "prettier": "prettier --config .prettierrc --write \"**/*.js\""
   },
   "repository": "https://github.com/whiskeyraven/server-bug-tracker.git",

@@ -5,11 +5,14 @@
         "plugin:node/recommended",
         "plugin:prettier/recommended"
     ],
-    "plugins": [
-        "prettier"
-    ],
+    "env": {
+        "es6": true
+    },
+    "parserOptions": {
+        "ecmaVersion": 10,
+        "sourceType": "module"
+    },
     "rules": {
-        "prettier/prettier": "error",
         "semi": "error",
         "semi-style": [
             "error",

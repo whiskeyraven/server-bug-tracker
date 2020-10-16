@@ -1,9 +1,9 @@
 /* eslint-disable no-console */
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable node/no-extraneous-require */
-const debug = require('debug')('node-angular');
+const util = require('util');
 const http = require('http');
 const app = require('./app');
+
+const debug = util.debuglog('node-angular');
 
 const normalizePort = (val) => {
   const port = parseInt(val, 10);
