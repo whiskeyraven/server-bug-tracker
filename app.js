@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const rateLimit = require('express-rate-limit');
@@ -13,6 +14,8 @@ const bugRoutes = require('./routes/bugs');
 const userRoutes = require('./routes/user');
 
 const app = express();
+
+console.log('environment :>> ', process.env.NODE_ENV);
 
 mongoose.set('useCreateIndex', true);
 mongoose
