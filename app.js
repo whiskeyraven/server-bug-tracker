@@ -15,8 +15,6 @@ const userRoutes = require('./routes/user');
 
 const app = express();
 
-console.log('environment :>> ', process.env.NODE_ENV);
-
 mongoose.set('useCreateIndex', true);
 mongoose
   .connect(process.env.MONGO_ATLAS_DB, {
